@@ -8,10 +8,10 @@ import java.util.List;
 
 public class App {
 
-    private ZooKeeper zooKeeper;
     private final String znodeName = "/z";
-    private final ProgramWatcher programWatcher;
-    private final ChildrenWatcher childrenWatcher;
+    private ProgramWatcher programWatcher;
+    private ChildrenWatcher childrenWatcher;
+    private ZooKeeper zooKeeper;
     private String processName;
     private Process process;
 
@@ -49,15 +49,6 @@ public class App {
 
     private void stopProgram() {
         process.destroy();
-    }
-
-    public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
-        App app = new App(args[0]);
-
-        app.start();
-
-        while (true) {
-        }
     }
 
     private class ProgramWatcher implements Watcher {
@@ -111,6 +102,15 @@ public class App {
             }
         }
 
+    }
+
+    public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
+        App app = new App(args[0]);
+
+        app.start();
+
+        while (true) {
+        }
     }
 
 }
